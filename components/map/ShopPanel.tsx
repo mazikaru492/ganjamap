@@ -1,26 +1,31 @@
-'use client'
+"use client";
 
-import { Sheet, SheetContent } from '@/components/ui/sheet'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { MapPin, Star, ExternalLink, Phone, Instagram } from 'lucide-react'
-import type { Shop } from '@/types'
-import { useRouter } from 'next/navigation'
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MapPin, Star, ExternalLink, Phone } from "lucide-react";
+import { Instagram } from "@/components/icons/Instagram";
+import type { Shop } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface ShopPanelProps {
-  shop: Shop | null
-  distance?: number
-  onClose: () => void
-  isMobile: boolean
+  shop: Shop | null;
+  distance?: number;
+  onClose: () => void;
+  isMobile: boolean;
 }
 
 function priceLabel(n?: 1 | 2 | 3) {
-  return n === 1 ? '$' : n === 2 ? '$$' : n === 3 ? '$$$' : '—'
+  return n === 1 ? "$" : n === 2 ? "$$" : n === 3 ? "$$$" : "—";
 }
 
-function PanelContent({ shop, distance, onClose }: Omit<ShopPanelProps, 'isMobile'>) {
-  const router = useRouter()
-  if (!shop) return null
+function PanelContent({
+  shop,
+  distance,
+  onClose,
+}: Omit<ShopPanelProps, "isMobile">) {
+  const router = useRouter();
+  if (!shop) return null;
 
   return (
     <div className="flex flex-col h-full">
@@ -88,7 +93,11 @@ function PanelContent({ shop, distance, onClose }: Omit<ShopPanelProps, 'isMobil
             </a>
           )}
           {shop.instagram && (
-            <a href={`https://instagram.com/${shop.instagram}`} target="_blank" rel="noreferrer">
+            <a
+              href={`https://instagram.com/${shop.instagram}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               <Button variant="outline" size="sm">
                 <Instagram className="w-3 h-3 mr-1" /> Instagram
               </Button>
@@ -102,8 +111,8 @@ function PanelContent({ shop, distance, onClose }: Omit<ShopPanelProps, 'isMobil
         <Button
           className="w-full bg-green-600 hover:bg-green-700 text-white"
           onClick={() => {
-            onClose()
-            router.push(`/shop?id=${shop.id}`)
+            onClose();
+            router.push(`/shop?id=${shop.id}`);
           }}
         >
           <ExternalLink className="w-4 h-4 mr-2" />
@@ -111,25 +120,38 @@ function PanelContent({ shop, distance, onClose }: Omit<ShopPanelProps, 'isMobil
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
-export default function ShopPanel({ shop, distance, onClose, isMobile }: ShopPanelProps) {
+export default function ShopPanel({
+  shop,
+  distance,
+  onClose,
+  isMobile,
+}: ShopPanelProps) {
   if (isMobile) {
     return (
-      <Sheet open={!!shop} onOpenChange={(open) => { if (!open) onClose() }}>
-        <SheetContent side="bottom" className="p-0 rounded-t-2xl h-[85vh] max-h-[85vh]">
+      <Sheet
+        open={!!shop}
+        onOpenChange={(open) => {
+          if (!open) onClose();
+        }}
+      >
+        <SheetContent
+          side="bottom"
+          className="p-0 rounded-t-2xl h-[85vh] max-h-[85vh]"
+        >
           <PanelContent shop={shop} distance={distance} onClose={onClose} />
         </SheetContent>
       </Sheet>
-    )
+    );
   }
 
-  if (!shop) return null
+  if (!shop) return null;
 
   return (
     <div className="absolute left-4 top-4 bottom-4 w-80 bg-white rounded-2xl shadow-xl overflow-hidden z-10 flex flex-col">
       <PanelContent shop={shop} distance={distance} onClose={onClose} />
     </div>
-  )
+  );
 }
