@@ -7,9 +7,11 @@
 ## ステップ1: Supabaseデータベースのセットアップ
 
 ### 1.1 Supabaseダッシュボードにアクセス
+
 https://supabase.com/dashboard にログイン
 
 ### 1.2 プロジェクトを選択
+
 `qvhjruyhortkygaqhdrt` プロジェクトを開く
 
 ### 1.3 SQLエディターでセットアップスクリプトを実行
@@ -21,6 +23,7 @@ https://supabase.com/dashboard にログイン
 5. **Run** ボタン（または `Ctrl+Enter`）をクリック
 
 ✅ 実行成功すると:
+
 - 8つのテーブルが作成されます
 - Row Level Securityポリシーが設定されます
 - 35件のサンプルショップデータが挿入されます
@@ -41,6 +44,7 @@ https://supabase.com/dashboard にログイン
 ### 2.2 Redirect URLsの追加
 
 **Redirect URLs** セクションに以下を追加:
+
 ```
 https://ganjamap.vercel.app/auth/callback
 https://ganjamap.vercel.app/**
@@ -66,6 +70,7 @@ https://ganjamap.vercel.app/**
 ### 3.2 必要なAPIの有効化
 
 以下のAPIが有効になっているか確認:
+
 - ✅ Maps JavaScript API
 - ✅ Places API (New)
 - ✅ Geocoding API
@@ -95,6 +100,7 @@ npm run dev
 ```
 
 http://localhost:3000 を開いて:
+
 - ✅ マップが表示される
 - ✅ ショップリストに35件が表示される
 - ✅ エリアフィルター（Sukhumvit, Silom等）が動作する
@@ -111,10 +117,12 @@ https://ganjamap.vercel.app を開いて同様にテスト
 ### マップにショップが表示されない
 
 **原因1: データベースにデータがない**
+
 - ステップ1のSQLスクリプトを実行したか確認
 - Supabaseダッシュボードの **Table Editor** → **shops** で35件のデータがあるか確認
 
 **原因2: RLSポリシーの問題**
+
 - `shop_images` テーブルに `shop_images are public` ポリシーが設定されているか確認
 - SQL Editorで以下を実行:
   ```sql
@@ -123,6 +131,7 @@ https://ganjamap.vercel.app を開いて同様にテスト
   エラーが出る場合はRLS設定に問題あり
 
 **原因3: Google Maps APIキーの制限**
+
 - ブラウザのコンソールを開いて `RefererNotAllowedMapError` エラーがないか確認
 - Google Cloud Consoleでリファラー制限を確認
 
@@ -144,6 +153,7 @@ https://ganjamap.vercel.app を開いて同様にテスト
 ## 完了！
 
 すべてのステップが完了すると、アプリは完全に動作します:
+
 - 📍 35件のサンプルショップがマップに表示
 - 🔍 エリアフィルター・検索機能
 - 🔐 Googleログイン機能
@@ -154,6 +164,7 @@ https://ganjamap.vercel.app を開いて同様にテスト
 ### 実際のショップデータを追加する場合
 
 Google Places APIを使って実データを取得:
+
 ```bash
 node scripts/scrape-shops.mjs
 ```
