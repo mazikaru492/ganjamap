@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /owner/
 Disallow: /auth/
 
-Sitemap: https://kushmap.vercel.app/sitemap.xml
+Sitemap: https://ganjamap.vercel.app/sitemap.xml

@@ -274,7 +274,7 @@ export default function DiscoveryPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-dvh md:h-screen flex flex-col bg-gray-50">
       {/* ===== HEADER ===== */}
       <AuthModal
         open={showAuth}
@@ -291,30 +291,30 @@ export default function DiscoveryPage() {
         }}
       />
 
-      <header className="bg-white border-b border-gray-200 shadow-sm z-20 shrink-0">
-        <div className="max-w-screen-2xl mx-auto px-3 py-2 space-y-1.5">
+      <header className="bg-white border-b border-gray-200 shadow-sm z-20 shrink-0 safe-top">
+        <div className="max-w-screen-2xl mx-auto px-2 sm:px-3 py-2 space-y-1.5">
           {/* Logo + Search row */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 shrink-0">
-              <Leaf className="w-5 h-5 text-green-600" />
-              <span className="font-black text-lg text-green-700 tracking-tight">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+              <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+              <span className="font-black text-base sm:text-lg text-green-700 tracking-tight">
                 KUSHMAP
               </span>
             </div>
 
             {/* Search */}
             <div className="flex-1 relative max-w-xl">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+              <Search className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
               <input
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
-                placeholder="ショップ名・エリアで検索..."
-                className="w-full h-9 pl-9 pr-8 rounded-lg border border-gray-300 text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                placeholder="検索..."
+                className="w-full h-8 sm:h-9 pl-8 sm:pl-9 pr-7 sm:pr-8 rounded-lg border border-gray-300 text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
               />
               {searchQuery && (
                 <button
                   onClick={() => handleSearch("")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 touch-target flex items-center justify-center"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -323,7 +323,7 @@ export default function DiscoveryPage() {
 
             <button
               onClick={handleLocate}
-              className="shrink-0 flex items-center gap-1.5 text-xs text-green-700 border border-green-300 rounded-lg px-2.5 h-9 hover:bg-green-50 transition-colors font-medium"
+              className="shrink-0 flex items-center justify-center gap-1.5 text-xs text-green-700 border border-green-300 rounded-lg px-2 sm:px-2.5 h-8 sm:h-9 hover:bg-green-50 transition-colors font-medium touch-target"
             >
               <LocateFixed className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">現在地</span>
@@ -333,7 +333,7 @@ export default function DiscoveryPage() {
             <div className="relative" ref={filterRef}>
               <button
                 onClick={() => setFilterOpen((f) => !f)}
-                className={`shrink-0 flex items-center gap-1.5 text-xs rounded-lg px-2.5 h-9 transition-colors border relative ${
+                className={`shrink-0 flex items-center justify-center gap-1.5 text-xs rounded-lg px-2 sm:px-2.5 h-8 sm:h-9 transition-colors border relative touch-target ${
                   activeFilterCount > 0
                     ? "bg-green-600 text-white border-green-600"
                     : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -348,9 +348,9 @@ export default function DiscoveryPage() {
                 )}
               </button>
 
-              {/* Filter dropdown */}
+              {/* Filter dropdown - full width on mobile */}
               {filterOpen && (
-                <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-200 p-4 space-y-4 z-30">
+                <div className="fixed sm:absolute inset-x-2 sm:inset-x-auto sm:right-0 top-auto sm:top-full mt-2 sm:w-72 bg-white rounded-xl shadow-xl border border-gray-200 p-4 space-y-4 z-30 max-h-[70vh] overflow-y-auto">
                   {/* Status */}
                   <div>
                     <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">
@@ -359,7 +359,7 @@ export default function DiscoveryPage() {
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
                       <button
                         onClick={() => setOnlyOpen((v) => !v)}
-                        className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                        className={`flex items-center gap-1.5 text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                           onlyOpen
                             ? "bg-green-600 text-white border-green-600"
                             : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -370,7 +370,7 @@ export default function DiscoveryPage() {
                       </button>
                       <button
                         onClick={() => setOnlyVerified((v) => !v)}
-                        className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                        className={`flex items-center gap-1.5 text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                           onlyVerified
                             ? "bg-blue-600 text-white border-blue-600"
                             : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -400,7 +400,7 @@ export default function DiscoveryPage() {
                         <button
                           key={val}
                           onClick={() => setStrainFilter(val)}
-                          className={`text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                          className={`text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                             strainFilter === val
                               ? "bg-green-600 text-white border-green-600"
                               : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -429,7 +429,7 @@ export default function DiscoveryPage() {
                         <button
                           key={String(val)}
                           onClick={() => setPriceFilter(val)}
-                          className={`text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                          className={`text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                             priceFilter === val
                               ? "bg-green-600 text-white border-green-600"
                               : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -449,7 +449,7 @@ export default function DiscoveryPage() {
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
                       <button
                         onClick={() => setAmenitySmokingArea((v) => !v)}
-                        className={`text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                        className={`text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                           amenitySmokingArea
                             ? "bg-green-600 text-white border-green-600"
                             : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -459,7 +459,7 @@ export default function DiscoveryPage() {
                       </button>
                       <button
                         onClick={() => setAmenityDelivery((v) => !v)}
-                        className={`text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                        className={`text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                           amenityDelivery
                             ? "bg-green-600 text-white border-green-600"
                             : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -469,7 +469,7 @@ export default function DiscoveryPage() {
                       </button>
                       <button
                         onClick={() => setAmenityEnglish((v) => !v)}
-                        className={`text-xs px-2.5 py-1.5 rounded-full border transition-colors ${
+                        className={`text-xs px-2.5 py-2 sm:py-1.5 rounded-full border transition-colors touch-target ${
                           amenityEnglish
                             ? "bg-green-600 text-white border-green-600"
                             : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -483,7 +483,7 @@ export default function DiscoveryPage() {
                   {activeFilterCount > 0 && (
                     <button
                       onClick={clearFilters}
-                      className="text-xs text-gray-400 hover:text-gray-600 underline w-full text-center pt-1"
+                      className="text-xs text-gray-400 hover:text-gray-600 underline w-full text-center pt-1 py-2 touch-target"
                     >
                       すべてクリア
                     </button>
@@ -495,7 +495,7 @@ export default function DiscoveryPage() {
             {user ? (
               <Link
                 href="/profile"
-                className="shrink-0 w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white text-sm font-bold hover:bg-green-700 transition-colors"
+                className="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-green-600 flex items-center justify-center text-white text-sm font-bold hover:bg-green-700 transition-colors touch-target"
                 title={user.email ?? "プロフィール"}
               >
                 {user.email?.charAt(0).toUpperCase() ?? (
@@ -505,7 +505,7 @@ export default function DiscoveryPage() {
             ) : (
               <button
                 onClick={() => setShowAuth(true)}
-                className="shrink-0 flex items-center gap-1.5 text-xs text-gray-600 border border-gray-300 rounded-lg px-2.5 h-9 hover:bg-gray-50 transition-colors"
+                className="shrink-0 flex items-center justify-center gap-1.5 text-xs text-gray-600 border border-gray-300 rounded-lg px-2 sm:px-2.5 h-8 sm:h-9 hover:bg-gray-50 transition-colors touch-target"
               >
                 <User className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">ログイン</span>
@@ -632,7 +632,8 @@ export default function DiscoveryPage() {
       {/* ===== MOBILE: Floating "地図を見る" button ===== */}
       <button
         onClick={() => setShowMobileMap(true)}
-        className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-green-600 text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg hover:bg-green-700 transition-colors"
+        className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-green-600 text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg hover:bg-green-700 transition-colors safe-bottom touch-target"
+        style={{ marginBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
         <Map className="w-4 h-4" />
         地図を見る
@@ -641,11 +642,11 @@ export default function DiscoveryPage() {
       {/* ===== MOBILE: Full-screen map overlay ===== */}
       {showMobileMap && (
         <div className="md:hidden fixed inset-0 z-40 bg-white flex flex-col">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0 safe-top">
             <span className="font-bold text-sm text-gray-900">マップ</span>
             <button
               onClick={() => setShowMobileMap(false)}
-              className="text-sm text-green-700 font-medium"
+              className="text-sm text-green-700 font-medium py-2 px-3 -mr-3 touch-target"
             >
               リストに戻る
             </button>
@@ -666,13 +667,17 @@ export default function DiscoveryPage() {
 
             {/* Selected shop mini card on mobile map */}
             {selected && (
-              <div className="absolute bottom-4 left-4 right-4 bg-white rounded-xl shadow-lg p-3 flex gap-3">
-                <div
-                  className={`w-16 h-16 rounded-lg shrink-0 flex items-center justify-center text-xl font-bold text-white ${selected.is_premium ? "bg-gradient-to-br from-amber-400 to-orange-500" : "bg-gradient-to-br from-green-500 to-green-700"}`}
+              <div
+                className="absolute bottom-4 left-3 right-3 bg-white rounded-xl shadow-lg p-3 flex gap-3"
+                style={{ marginBottom: "env(safe-area-inset-bottom, 0px)" }}
+              >
+                <Link
+                  href={`/shop/${selected.id}`}
+                  className={`w-14 h-14 sm:w-16 sm:h-16 rounded-lg shrink-0 flex items-center justify-center text-lg sm:text-xl font-bold text-white ${selected.is_premium ? "bg-gradient-to-br from-amber-400 to-orange-500" : "bg-gradient-to-br from-green-500 to-green-700"}`}
                 >
                   {selected.name.charAt(0)}
-                </div>
-                <div className="flex-1 min-w-0">
+                </Link>
+                <Link href={`/shop/${selected.id}`} className="flex-1 min-w-0">
                   <p className="font-bold text-sm truncate">{selected.name}</p>
                   <p className="text-xs text-gray-500 truncate">
                     {selected.address}
@@ -695,10 +700,10 @@ export default function DiscoveryPage() {
                       km
                     </span>
                   </div>
-                </div>
+                </Link>
                 <button
                   onClick={() => setSelected(null)}
-                  className="text-gray-400 hover:text-gray-600 shrink-0"
+                  className="text-gray-400 hover:text-gray-600 shrink-0 p-2 -mr-2 touch-target"
                 >
                   <X className="w-4 h-4" />
                 </button>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KUSHMAP — Thailand Cannabis Dispensary Directory",
     description: "Find the best cannabis dispensaries in Thailand. Browse 2,900+ weed shops in Bangkok, Phuket, Chiang Mai, Pattaya and more.",
-    url: "https://kushmap.vercel.app",
+    url: "https://ganjamap.vercel.app",
     siteName: "KUSHMAP",
     locale: "en_US",
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://kushmap.vercel.app",
+    canonical: "https://ganjamap.vercel.app",
   },
 };
 
