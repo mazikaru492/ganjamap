@@ -673,9 +673,31 @@ export default function DiscoveryPage() {
               >
                 <Link
                   href={`/shop/${selected.id}`}
-                  className={`w-14 h-14 sm:w-16 sm:h-16 rounded-lg shrink-0 flex items-center justify-center text-lg sm:text-xl font-bold text-white ${selected.is_premium ? "bg-gradient-to-br from-amber-400 to-orange-500" : "bg-gradient-to-br from-green-500 to-green-700"}`}
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg shrink-0 overflow-hidden"
                 >
-                  {selected.name.charAt(0)}
+                  {(() => {
+                    const photo =
+                      selected.shop_images?.find((i) => i.is_primary) ??
+                      selected.shop_images?.[0];
+                    const photoUrl = photo?.url || selected.google_photo_url;
+                    if (photoUrl) {
+                      return (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={photoUrl}
+                          alt={selected.name}
+                          className="w-full h-full object-cover"
+                        />
+                      );
+                    }
+                    return (
+                      <div
+                        className={`w-full h-full flex items-center justify-center text-lg sm:text-xl font-bold text-white ${selected.is_premium ? "bg-gradient-to-br from-amber-400 to-orange-500" : "bg-gradient-to-br from-green-500 to-green-700"}`}
+                      >
+                        {selected.name.charAt(0)}
+                      </div>
+                    );
+                  })()}
                 </Link>
                 <Link href={`/shop/${selected.id}`} className="flex-1 min-w-0">
                   <p className="font-bold text-sm truncate">{selected.name}</p>
